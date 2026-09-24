@@ -1,9 +1,11 @@
 
 <header class="barra" th:fragment="cabecalho">
+	<a th:href="@{/}" class="logo-link">
 	<div class="barra-conteudo">
 		<div class="logo"></div>
 		<span class="logo-texto"><span class="simbolo">+</span>Impos<span>tinho</span></span>
 	</div>
+	</a>
 	<nav class="menu-sistema"  >
 		<a th:href="@{/medico/listar}" sec:authorize="hasAnyRole('ADMIN','ATENDENTE')" >Médicos</a>
 		<a th:href="@{/paciente/listar}" sec:authorize="hasAnyRole('ADMIN','ATENDENTE')">Pacientes</a>
