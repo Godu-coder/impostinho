@@ -16,6 +16,7 @@ import br.com.mesquita.service.AcessoUsuarioService;
 
 @Controller
 @RequestMapping("/usuario")
+@PreAuthorize("hasRole('ADMIN')")
 public class UsuarioController {
 
 	AcessoUsuarioService acessoUsuarioService;
@@ -31,14 +32,14 @@ public class UsuarioController {
 		return "usuario/listar";
 	}
 
-	@PreAuthorize("hasRole('ADMIN')")
+	
 	@GetMapping("/cadastro")
 	String cadastrarUsuarios(Model model) {
 		model.addAttribute("usuario", new Usuario());
 		return "usuario/cadastro";
 	}
 
-	@PreAuthorize("hasRole('ADMIN')")
+	
 	@GetMapping("/editar")
 	public String editarUsuario(@RequestParam Long id, Model model) {
 		Usuario usuario = acessoUsuarioService.buscarPorId(id);
