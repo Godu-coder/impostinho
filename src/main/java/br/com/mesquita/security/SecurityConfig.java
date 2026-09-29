@@ -21,18 +21,17 @@ import br.com.mesquita.service.AcessoUsuarioService;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    SecurityFilterChain securityFilterChain(HttpSecurity http) {
         http
             .csrf(csrf -> csrf.disable()) // Disable CSRF for stateless REST APIs
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/", "/css/**").permitAll()
-                .requestMatchers("/usuario/cadastro").hasRole("ADMIN")
                 .requestMatchers(PathRequest.toH2Console()).hasRole("ADMIN")
                 .requestMatchers("/api/user/**").hasAnyRole("USER", "ADMIN")
                 .anyRequest().authenticated()
                 
             )
-            .formLogin((form) -> form
+            .formLogin(form -> form
     			.loginPage("/login")
     			.loginProcessingUrl("/perform_login")
     			.defaultSuccessUrl("/", false)
@@ -53,12 +52,12 @@ public class SecurityConfig {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(); // Hashing algorithm for passwords
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AcessoUsuarioService userDetailsService, PasswordEncoder passwordEncoder) {
+    AuthenticationManager authenticationManager(AcessoUsuarioService userDetailsService, PasswordEncoder passwordEncoder) {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailsService);
         provider.setPasswordEncoder(passwordEncoder);
         return new ProviderManager(provider);
@@ -69,6 +68,6 @@ public class SecurityConfig {
      */
     void geraSenha() {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        System.out.println(encoder.encode("senha"));
+        IO.println(encoder.encode("senha"));
     }
 }

@@ -38,9 +38,6 @@ public class Usuario {
 	@Column(nullable = false)
 	private boolean ativo = true;
 
-	public Usuario() {
-	}
-
 	public void setId(Long id) {
 		this.id =id;
 	}

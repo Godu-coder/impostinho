@@ -27,16 +27,6 @@ public class Medico extends Usuario {
 	private LocalDate dataAdmissao;
 	private LocalDate dataDemissao;
 
-	public Medico() {
-	}
-
-	public Medico(Set<String> especialidade, String cpf, LocalDate dataAdmissao) {
-		super();
-		this.especialidade = especialidade;
-		this.cpf = cpf;
-		this.dataAdmissao = dataAdmissao;
-	}
-
 	public Set<String> getEspecialidade() {
 		return especialidade;
 	}
