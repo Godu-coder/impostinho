@@ -35,25 +35,6 @@
 		</table>
 	</div>
 
-	<div class="caixa">
-
-		<form th:action="@{demitir}" th:object="${medico}" method="post" onsubmit="return confirm('Tem certeza que deseja demitir o médico?');">
-			<div class="campo">
-				<label for="medicos">Demitir médico</label>
-				<select id="medicos" th:field="*{id}">
-					<option value="">Selecione o médico</option>
-					<option th:each="medicos : ${listaM}"
-							th:if="${medicos.ativo == true}"
-					        th:value="${medicos.id}"
-					        th:text="${medicos.nome}">Nome do médico</option>
-				</select>
-			</div>
-			<div class="acoes">
-				<button type="submit" class="btn-salvar">Demitir</button>
-			</div>
-		</form>
-	</div>
-
 	<a th:href="@{/medico/cadastro}" class="btn-salvar ">+ Novo Médico</a>
 	
 	<footer th:replace="~{fragments/util :: rodape}"></footer>
