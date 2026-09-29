@@ -8,17 +8,9 @@
 	<link rel="stylesheet" th:href="@{/css/components.css}">
 </head>
 <body>
-	<header class="barra" style="display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
-		<div class="barra-conteudo">
-			<div class="logo"></div>
-			<span class="logo-texto"><span class="simbolo">+</span>Impos<span>tinho</span>
-		</div>
-		<nav class="menu-sistema">
-		    <a th:href="@{/medico/listar}">Médicos</a>
-		    <a th:href="@{/consulta/listar}">Consultas</a>
-			<a th:href="@{/usuario/cadastro}">Cadastro</a>
-		</nav>
-	</header>
+		
+	<header th:replace="~{fragments/util :: cabecalho}"></header>
+		
 	<main class="conteudo-principal">
 		<h2>Lista de Usuários</h2>
 		<div class="tabela-container">
@@ -39,9 +31,8 @@
 			</table>
 		</div>
 	</main>
-	<footer class="rodape">
-			<p>&copy; 2026 Impostinho - Sistema de Gestão de Usuários</p>
-	</footer>
+	
+	<footer th:replace="~{fragments/util :: rodape}"></footer>
 </body>
 </html>
 
