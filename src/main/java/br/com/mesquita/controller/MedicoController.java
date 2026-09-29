@@ -70,7 +70,7 @@ public class MedicoController {
 	}
 
 	@GetMapping("/demitir")
-	String demitirMedicos(@RequestParam("id") Long id) {
+	String demitirMedicos(@RequestParam Long id) {
        medicoService.demitir(id);
 	   return "redirect:/medico/listar";
 	}
