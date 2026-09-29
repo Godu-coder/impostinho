@@ -36,6 +36,7 @@
 				<input type="text" th:value="*{DataAdmissaoFormatada}" disabled class="campo-bloqueado" />
 			</div>
 			<div class="acoes">
+				<a th:href="@{/medico/demitir (id=*{id})}"  class="btn-cancelar">Demitir</a>
 				<button type="submit" class="btn-salvar">Salvar Alterações</button>
 				<a th:href="@{/medico/listar}" class="btn-cancelar">Cancelar</a>
 			</div>

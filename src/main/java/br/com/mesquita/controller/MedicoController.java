@@ -69,9 +69,9 @@ public class MedicoController {
 
 	}
 
-	@PostMapping("/demitir")
-	String demitirMedicos(@ModelAttribute Medico medico) {
-       medicoService.demitir(medico.getId());
+	@GetMapping("/demitir")
+	String demitirMedicos(@RequestParam("id") Long id) {
+       medicoService.demitir(id);
 	   return "redirect:/medico/listar";
 	}
 }
