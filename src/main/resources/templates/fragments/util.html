@@ -11,8 +11,8 @@
 		<a th:href="@{/paciente/listar}"
 		 sec:authorize="hasAnyRole('ADMIN','ATENDENTE')">Pacientes</a>
 		<a th:href="@{/consulta/listar}" sec:authorize="hasAnyRole('ADMIN','USUARIO','ATENDENTE')" >Consultas</a>
-		
 		<a th:href="@{/medico/listar/demitidos}" sec:authorize="hasAnyRole('ADMIN','ATENDENTE')">Demitidos</a>
+		<a th:href="@{/usuario/listar}" sec:authorize="hasRole('ADMIN')">Usuarios</a>
 		<a th:href="@{/h2-console}" sec:authorize="hasRole('ADMIN')">H2 BD</a>
 		<a th:href="@{/login}" sec:authorize="!isAuthenticated()" >Login</a>
 		<a th:href="@{/logout}" sec:authorize="hasAnyRole('ADMIN','USUARIO','ATENDENTE')" >Logout</a>
