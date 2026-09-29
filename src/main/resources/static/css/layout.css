@@ -27,7 +27,7 @@
 .barra-conteudo {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 2px;
 }
  
 .logo {
@@ -59,7 +59,7 @@
 
 .menu-sistema {
     display: flex;
-    gap: 20px;
+    gap: 10px;
 }
 
 .menu-sistema a {
@@ -67,10 +67,20 @@
     text-decoration: none;
     font-weight: bold;
     padding: 5px 10px;
+	font-size: 1.2rem;
 }
  
 .menu-sistema a:hover {
     color: var(--cor-destaque-texto);
+}
+
+@media (width <= 900px) {
+	.menu-sistema {
+	    gap: 2px;
+	}
+	.menu-sistema a {
+		font-size: 0.8rem;
+	}
 }
 
 /* --------------------------------------------------------------------------

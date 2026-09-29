@@ -100,6 +100,7 @@
     cursor: pointer;
     text-align: center;
     transition: background-color var(--transicao-padrao);
+	margin-bottom: 10px;
 }
 
 .btn-salvar:hover {
@@ -110,7 +111,7 @@
     background-color: var(--cor-cancelar);
     color: white;
     text-decoration: none;
-    padding: 10px 20px;
+    padding: 10px 12px;
     border-radius: var(--raio-padrao);
     font-weight: bold;
     font-size: 0.95rem;
@@ -137,7 +138,7 @@
     background-color: var(--cor-primaria);
 }
 
-.formulario-conteiner button {
+.formulario-conteiner button, .formulario-conteiner button + a {
     display: block;
     width: 100%;
     max-width: 250px;
@@ -148,7 +149,6 @@
     font-size: 15px;
     font-weight: bold;
     color: white;
-    background-color: var(--cor-acao);
     cursor: pointer;
 }
 
