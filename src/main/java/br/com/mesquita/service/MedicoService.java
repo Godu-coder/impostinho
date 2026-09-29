@@ -1,10 +1,11 @@
 package br.com.mesquita.service;
 
+import java.time.Clock;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.hibernate.PropertyValueException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,29 +29,30 @@ public class MedicoService {
 	}
 
 	public void demitir(Long id) {
-		Medico medico = medicoRepository.findById(id).orElse(null);
-		medico.setAtivo(false);
-		medico.setDataDemissao(LocalDate.now());
-		medicoRepository.save(medico);
+		Optional<Medico> medico = medicoRepository.findById(id);
+		medico.ifPresent(m -> {
+			m.setAtivo(false);
+			m.setDataDemissao(LocalDate.now(Clock.systemDefaultZone()));
+			medicoRepository.save(medico.get());
+		});
 	}
 
 	public Long salvar(Medico medico) throws PropertyValueException {
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 		if (medico.getId() != null) {
 			Medico medicoBanco = buscarPorId(medico.getId());
 
-			if (medicoBanco.getAtivo() == false) { // lógica antiga
+			if (!medicoBanco.getAtivo()) { // lógica antiga
 				medico.setAtivo(true);
 			}
 			if (StringUtils.isBlank(medico.getSenha())) { // médico está sendo atualizado e a senha não foi alterada
 				medico.setSenha(medicoBanco.getSenha());
 			} else {
-				medico.setSenha(encoder.encode(medico.getSenha()));
+				medico.setSenha(passwordEncoder.encode(medico.getSenha()));
 			}
 		} else {
 			medico.setRole("ROLE_USUARIO");
-			medico.setSenha(encoder.encode(medico.getSenha()));
+			medico.setSenha(passwordEncoder.encode(medico.getSenha()));
 		}
 
 		if (StringUtils.isBlank(medico.getSenha())) {

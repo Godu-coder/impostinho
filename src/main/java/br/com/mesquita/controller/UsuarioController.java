@@ -40,7 +40,7 @@ public class UsuarioController {
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/editar")
-	public String editarUsuario(@RequestParam("id") Long id, Model model) {
+	public String editarUsuario(@RequestParam Long id, Model model) {
 		Usuario usuario = acessoUsuarioService.buscarPorId(id);
 		model.addAttribute("usuario", usuario);
 		return "usuario/cadastro";
@@ -48,7 +48,7 @@ public class UsuarioController {
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/salvar")
-	String SalvarUsuarios(@ModelAttribute Usuario usuario) {
+	String salvarUsuarios(@ModelAttribute Usuario usuario) {
 		acessoUsuarioService.salvar(usuario);
 		return "redirect:/usuario/listar";
 	}

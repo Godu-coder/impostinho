@@ -24,15 +24,6 @@ public class Consulta {
 	@JoinColumn(name = "paciente_id", nullable = false)
 	private Paciente paciente;
 	
-	public Consulta() {
-
-	}
-	public Consulta(LocalDateTime horario, Medico medico, Paciente paciente) {
-		this.horario = horario;
-		this.medico = medico;
-		this.paciente = paciente;
-	}
-	
 	public LocalDateTime getHorario() {
 		return horario;
 	}
@@ -57,6 +48,4 @@ public class Consulta {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	
 }

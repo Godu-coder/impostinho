@@ -21,42 +21,6 @@ public class Paciente extends Usuario {
 	private String alergia;
     private String historico;
 	private String medicamento;
-	
-	public Paciente() {
-	}
-
-	public Paciente(String cpf, LocalDate dataNascimento) {
-		this.cpf = cpf;
-		this.dataNascimento = dataNascimento;
-	}
-
-	public Paciente(String cpf, LocalDate dataNascimento, String sexo, String endereco,
-			String telefone, String alergia) {
-		super();
-		this.cpf = cpf;
-		this.dataNascimento = dataNascimento;
-		this.sexo = sexo;
-		this.endereco = endereco;
-		this.telefone = telefone;
-		this.alergia = alergia;
-	}
-	
-	
-
-	public Paciente(Long id, String nome, String cpf, LocalDate dataNascimento, String sexo, String endereco,
-			String telefone, String alergia, String historico, String medicamento) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.cpf = cpf;
-		this.dataNascimento = dataNascimento;
-		this.sexo = sexo;
-		this.endereco = endereco;
-		this.telefone = telefone;
-		this.alergia = alergia;
-		this.historico = historico;
-		this.medicamento = medicamento;
-	}
 
 	public String getHistorico() {
 		return historico;

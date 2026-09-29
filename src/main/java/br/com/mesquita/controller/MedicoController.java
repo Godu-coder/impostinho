@@ -53,7 +53,7 @@ public class MedicoController {
 	String cadastrarMedicos(@ModelAttribute Medico medico, Model model) {
 		try {
 			medicoService.salvar(medico);
-		} catch(PropertyValueException e) {
+		} catch(PropertyValueException _) {
 			model.addAttribute("medico", medico);
 			model.addAttribute("mensagemErro", "Senha inválida.");
 			return "medico/cadastro";
@@ -62,7 +62,7 @@ public class MedicoController {
 	}
 	
 	@GetMapping("/editar")
-	public String editarMedico(@RequestParam("id") Long id, Model model) {
+	public String editarMedico(@RequestParam Long id, Model model) {
 	    Medico medico = medicoService.buscarPorId(id);
 	    model.addAttribute("medico", medico);
 	    return "medico/editar"; 
