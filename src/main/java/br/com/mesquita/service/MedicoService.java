@@ -38,9 +38,9 @@ public class MedicoService {
 	}
 
 	public Long salvar(Medico medico) throws PropertyValueException {
-
+		Medico medicoBanco = buscarPorId(medico.getId());
 		if (medico.getId() != null) {
-			Medico medicoBanco = buscarPorId(medico.getId());
+			
 
 			if (!medicoBanco.getAtivo()) { // lógica antiga
 				medico.setAtivo(true);
@@ -53,6 +53,7 @@ public class MedicoService {
 		} else {
 			medico.setRole("ROLE_USUARIO");
 			medico.setSenha(passwordEncoder.encode(medico.getSenha()));
+			medico.setUsername(medicoBanco.getUsername());
 		}
 
 		if (StringUtils.isBlank(medico.getSenha())) {
