@@ -3,6 +3,7 @@ package br.com.mesquita.controller;
 import java.util.List;
 
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,9 +34,8 @@ public class ConsultaController {
 	}
 	
 	@GetMapping("/listar")
-	
-	String ListarConsultas(Model model){
-		List<Consulta> listaConsulta = consultaService.listar();
+	String listarConsultas(Model model, Authentication authentication){
+		List<Consulta> listaConsulta = consultaService.listar(authentication);
 		model.addAttribute("listaC", listaConsulta);
 		return "consulta/listar";
 	}
