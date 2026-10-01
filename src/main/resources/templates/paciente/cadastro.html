@@ -47,11 +47,19 @@
 						<label for="input-alergias">Alergias:</label>
 						<input type="text" id="input-alergias" th:field="*{alergia}" placeholder="Digite as alergias">
 					</div>
+					<div class="campo">
+						<label for="input-nome-usuario">Nome de Usuário: </label>
+						<input type="text" id="input-nome-usuario" th:field="*{username}" placeholder="Digite o nome de usuário">
+					</div>
+					<div class="campo">
+						<label for="input-senha-usuario">Senha: </label>
+						<input type="password" id="input-senha-usuario" th:field="*{senha}" placeholder="Digite a senha de usuário">
+					</div>
 				</div>
 				<div class="acoes">
-									<button type="submit" class="btn-salvar">Salvar</button>
-									<a th:href="@{/paciente/listar}" class="btn-cancelar">Cancelar</a>
-								</div>
+					<button type="submit" class="btn-salvar">Salvar</button>
+					<a th:href="@{/paciente/listar}" class="btn-cancelar">Cancelar</a>
+				</div>
 			</form>
 		</div>
 	</main>
