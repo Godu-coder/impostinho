@@ -3,13 +3,13 @@ package br.com.mesquita.controller;
 import java.util.List;
 
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.mesquita.model.Consulta;
 import br.com.mesquita.model.Medico;
@@ -33,9 +33,8 @@ public class ConsultaController {
 	}
 	
 	@GetMapping("/listar")
-	
-	String ListarConsultas(Model model){
-		List<Consulta> listaConsulta = consultaService.listar();
+	String listarConsultas(Model model, Authentication authentication){
+		List<Consulta> listaConsulta = consultaService.listar(authentication);
 		model.addAttribute("listaC", listaConsulta);
 		return "consulta/listar";
 	}
@@ -53,8 +52,15 @@ public class ConsultaController {
 	
 	@PostMapping("/salvar")
 	@PreAuthorize("hasAnyRole('ATENDENTE', 'ADMIN')")
-	public String salvar(@ModelAttribute Consulta consulta, @RequestParam Long medicoId, @RequestParam Long pacienteId) {
-		consultaService.salvar(consulta, medicoId, pacienteId);
+	public String salvar(@ModelAttribute Consulta consulta, Model model) {
+		try {
+		consultaService.salvar(consulta);
+		}catch(IllegalArgumentException _) {
+			model.addAttribute("listaMedico", medicoService.listar());
+	        model.addAttribute("listaPaciente", pacienteService.listar());
+			model.addAttribute("mensagemErro", "Data da consulta ínvalida.");
+			return "consulta/cadastro";
+		}
 		return "redirect:/consulta/listar";
 	}
 	

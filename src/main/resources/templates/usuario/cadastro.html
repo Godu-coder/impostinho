@@ -65,7 +65,10 @@
 				</div>
 
 				<div class="grupo-botoes">
-					<button type="button" class="botao botao-cancelar">Cancelar</button>
+					
+						<a th:href="@{/usuario/listar}" class="botao botao-cancelar">Cancelar</a>
+						
+					
 					<button type="submit" class="botao botao-salvar" th:text="${usuario.id != null} ? 'Atualizar Usuário' : 'Cadastrar Usuário'">Cadastrar Usuário</button>
 				</div>
 			</form>
