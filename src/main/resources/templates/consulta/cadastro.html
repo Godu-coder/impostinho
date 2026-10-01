@@ -17,15 +17,16 @@
     <div class="caixa">
         <h2>Cadastro de consulta</h2>
 
-        <form action="salvar" method="post">
+        <form th:action="@{/consulta/salvar}" method="post" th:object="${consulta}">
             <p class="campo">
                 <label for="input-horario">Horário:</label>
                 <input type="datetime-local" id="input-horario" name="horario" placeholder="Digite o horário">
+				<div th:if="${mensagemErro}" class="alert alert-erro" th:text="${mensagemErro}"></div>
             </p>
 
             <p class="campo">
                 <label for="input-medico">Médico:</label>
-                <select id="input-medico" name="medicoId">
+                <select id="input-medico" name="medicoId" th:field="*{medico.id}">
                     <option value="" disabled selected>Selecione um médico</option>
                     <option th:each="m : ${listaMedico}" th:value="${m.id}" th:text="${m.nome}"></option>
                 </select>
@@ -33,7 +34,7 @@
 
             <p class="campo">
                 <label for="input-paciente">Paciente:</label>
-                <select id="input-paciente" name="pacienteId">
+                <select id="input-paciente" name="pacienteId" th:field="*{paciente.id}">
                     <option value="" disabled selected>Selecione um paciente</option>
                     <option th:each="p : ${listaPaciente}" th:value="${p.id}" th:text="${p.nome}"></option>
                 </select>

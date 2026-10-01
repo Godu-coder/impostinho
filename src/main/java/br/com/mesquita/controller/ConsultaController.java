@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.mesquita.model.Consulta;
 import br.com.mesquita.model.Medico;
@@ -53,8 +52,15 @@ public class ConsultaController {
 	
 	@PostMapping("/salvar")
 	@PreAuthorize("hasAnyRole('ATENDENTE', 'ADMIN')")
-	public String salvar(@ModelAttribute Consulta consulta, @RequestParam Long medicoId, @RequestParam Long pacienteId) {
-		consultaService.salvar(consulta, medicoId, pacienteId);
+	public String salvar(@ModelAttribute Consulta consulta, Model model) {
+		try {
+		consultaService.salvar(consulta);
+		}catch(IllegalArgumentException _) {
+			model.addAttribute("listaMedico", medicoService.listar());
+	        model.addAttribute("listaPaciente", pacienteService.listar());
+			model.addAttribute("mensagemErro", "Data da consulta ínvalida.");
+			return "consulta/cadastro";
+		}
 		return "redirect:/consulta/listar";
 	}
 	
