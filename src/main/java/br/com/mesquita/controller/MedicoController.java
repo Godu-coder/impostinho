@@ -62,7 +62,7 @@ public class MedicoController {
 	}
 	
 	@GetMapping("/editar")
-	public String editarMedico(@RequestParam Long id, Model model) {
+	public String editarMedico(@RequestParam("id") Long id, Model model) {
 	    Medico medico = medicoService.buscarPorId(id);
 	    model.addAttribute("medico", medico);
 	    return "medico/editar"; 
