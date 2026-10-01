@@ -210,6 +210,8 @@ body {
   display: flex;
   gap: 12px;
   margin-top: 8px;
+  justify-content: center;
+  align-items: center;
 }
 
 .botao {
@@ -223,14 +225,19 @@ body {
   transition: all 0.2s ease;
 }
 
-.botao-cancelar{
+.botao-cancelar {
   width: 35%;
   background-color: transparent;
   border: 1px solid #e5e7eb;
   color: #1f2937;
   box-shadow: 0 4px 12px rgb(192, 192, 192);
-
-}
+  display: inline-flex;       
+  justify-content: center;   
+  align-items: center;      
+  text-decoration: none;    
+  text-align: center;
+  box-sizing: border-box; 
+ }
 
 .botao-cancelar:hover {
   background-color: rgb(255, 255, 255);
