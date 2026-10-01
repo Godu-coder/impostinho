@@ -101,6 +101,13 @@ public class Paciente extends Usuario {
 		return dataNascimento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 	}
 	
+	public String getDataNascInput() {
+		if (dataNascimento == null) {
+			return "00/00/0000";
+		}
+		return dataNascimento.format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+	}
+	
 	public String getFoneFormatado() {
 		if (this.telefone == null || this.telefone.length() != 13) {
 			return this.telefone;
