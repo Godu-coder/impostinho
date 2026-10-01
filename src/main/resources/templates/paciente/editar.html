@@ -19,14 +19,12 @@
 		<form th:action="@{salvar}" th:object="${paciente}" method="post">
 
 			<input type="hidden" th:field="*{id}" />
-			
 			<input type="hidden" th:field="*{nome}" />
-
 			<input type="hidden" th:field="*{cpf}" />
 			
 			<div class="campo">
 				<label>Nome:</label>
-				<input type="text" th:field="*{nome}" required disabled class="campo-bloqueado"/>
+				<input type="text" th:field="*{nome}" disabled class="campo-bloqueado"/>
 			</div>
 
 			<div class="campo">
@@ -36,7 +34,7 @@
 
 			<div class="campo">
 				<label>Data de Nascimento:</label>
-				<input type="date" th:field="*{dataNascimento}" />
+				<input type="date" name="dataNascimento" th:value="${#dates.format(paciente.dataNasc, 'yyyy-MM-dd')}"/>
 			</div>
 			
 			<div class="campo">
