@@ -24,6 +24,7 @@
 }
 
 .campo input[type="text"],
+.campo input[type="password"],
 .campo input[type="date"],
 .campo input[type="tel"],
 .campo input[type="datetime-local"],
@@ -39,7 +40,9 @@
 }
 
 .campo input[type="text"]:focus:not(.campo-bloqueado),
+
 .campo input[type="date"]:focus:not(.campo-bloqueado),
+.campo input[type="password"]:focus:not(.campo-bloqueado),
 .campo input[type="tel"]:focus:not(.campo-bloqueado),
 .campo input[type="datetime-local"]:focus:not(.campo-bloqueado),
 .campo select:focus:not(.campo-bloqueado) {

@@ -1,12 +1,16 @@
 package br.com.mesquita.service;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.mesquita.model.Paciente;
 import br.com.mesquita.repository.PacienteRepository;
+
+import java.util.List;
+
+
 
 @Service
 public class PacienteService {
@@ -24,10 +28,28 @@ public class PacienteService {
 	}
 
 	public Long salvar(Paciente paciente) {
-		if (paciente.getSenha() != null && !paciente.getSenha().isBlank()) {
-			paciente.setSenha(passwordEncoder.encode(paciente.getSenha()));
+		
+		if (paciente.getRole() == null || paciente.getRole().trim().isEmpty()) {
 			paciente.setRole("ROLE_USUARIO");
 		}
+		
+		if (paciente.getId() != null) {
+			Paciente pacienteBanco = pacienteRepository.findById(paciente.getId()).orElse(null);
+			
+		  if(pacienteBanco != null) {
+			  
+			  if (paciente.getSenha() == null || paciente.getSenha().trim().isEmpty()) {
+				  paciente.setSenha(pacienteBanco.getSenha());
+			  } else {
+				  paciente.setSenha(passwordEncoder.encode(paciente.getSenha()));
+			  }
+		  }
+		} else {
+			if (paciente.getSenha() != null && !paciente.getSenha().trim().isEmpty()) {
+				paciente.setSenha(passwordEncoder.encode(paciente.getSenha()));
+			}
+		}
+		
 		return pacienteRepository.save(paciente).getId();
 	}
 

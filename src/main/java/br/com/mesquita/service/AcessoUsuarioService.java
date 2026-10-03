@@ -60,6 +60,7 @@ public class AcessoUsuarioService implements UserDetailsService {
 		return usuarioRepository.save(usuario).getId();
 	}
 	
+	
 	public Usuario buscarPorId(Long id) {
 		return usuarioRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado: " + id));
