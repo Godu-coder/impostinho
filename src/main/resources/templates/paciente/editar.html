@@ -56,6 +56,17 @@
 				<label>Alergia:</label>
 				<input type="text" th:field="*{alergia}"/>
 			</div>
+			
+			<div class="campo">
+			    <label for="username">Username:</label>
+			    <input type="text" id="username" th:field="*{username}" required />
+			</div>
+
+			<div class="campo">
+			    <label for="senha">Senha:</label>
+			    <input type="password" id="senha" th:field="*{senha}" placeholder="Digite a nova senha" />
+			</div>
+			
 
 			<div class="acoes">
 				<button type="submit" class="btn-salvar">Salvar Alterações</button>
