@@ -18,12 +18,20 @@ public class ConsultaService {
 		this.consultaRepository = consultaRepository;
 	}
 	
-	public List<Consulta> listar(AcessoUsuario usuario) {
+	public List<Consulta> listar(AcessoUsuario usuario, boolean passadas) {
+		List<Consulta> lista;
+
 		if (usuario.isAdmin() || usuario.isAtendente()) {
-			return consultaRepository.findAll();
+			lista = consultaRepository.findAll();
+		} else {
+			lista = consultaRepository.findByMedicoIdOrPacienteId(usuario.getId(), usuario.getId());
 		}
 
-		return consultaRepository.findByMedicoIdOrPacienteId(usuario.getId(), usuario.getId());
+		LocalDateTime agora = LocalDateTime.now();
+
+		return lista.stream()
+				.filter(c -> passadas ? c.getHorario().isBefore(agora) : !c.getHorario().isBefore(agora))
+				.toList();
 	}
 	
 	public Long salvar(Consulta consulta) {
