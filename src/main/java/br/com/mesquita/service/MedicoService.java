@@ -38,7 +38,7 @@ public class MedicoService {
 	}
 
 	public Long salvar(Medico medico) throws PropertyValueException {
-
+		
 		if (medico.getId() != null) {
 			Medico medicoBanco = buscarPorId(medico.getId());
 
@@ -50,11 +50,13 @@ public class MedicoService {
 			} else {
 				medico.setSenha(passwordEncoder.encode(medico.getSenha()));
 			}
+			medico.setUsername(medicoBanco.getUsername());
 		} else {
-			medico.setRole("ROLE_USUARIO");
 			medico.setSenha(passwordEncoder.encode(medico.getSenha()));
 		}
 
+		medico.setRole("ROLE_USUARIO");
+		
 		if (StringUtils.isBlank(medico.getSenha())) {
 			throw new PropertyValueException("Senha não pode estar vazia.", "Medico", "Senha");
 		}
