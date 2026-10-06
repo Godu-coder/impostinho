@@ -7,5 +7,5 @@ import br.com.mesquita.model.Consulta;
 
 public interface ConsultaRepository extends JpaRepository<Consulta, Long> {
 
-	List<Consulta> findByMedicoUsernameOrPacienteUsername(String usernameMedico, String usernamePaciente);
+	List<Consulta> findByMedicoIdOrPacienteId(Long medicoId, Long pacienteId);
 }
