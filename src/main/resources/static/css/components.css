@@ -160,8 +160,8 @@
    4. TABELA (tela de listagem)
    -------------------------------------------------------------------------- */
 .tabela-container {
-    width: 90%;
-    max-width: 900px;
+    width: 95%;
+    max-width: 1200px;
     margin: 20px 0 40px;
     overflow-x: auto;
 }
