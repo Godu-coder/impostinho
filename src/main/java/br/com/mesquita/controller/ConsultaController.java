@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.mesquita.model.Consulta;
 import br.com.mesquita.model.Medico;
@@ -34,9 +35,10 @@ public class ConsultaController {
 	}
 	
 	@GetMapping("/listar")
-	String listarConsultas(Model model, @AuthenticationPrincipal AcessoUsuario usuarioAtual){
-		List<Consulta> listaConsulta = consultaService.listar(usuarioAtual);
+	String listarConsultas(Model model, @AuthenticationPrincipal AcessoUsuario usuarioAtual, @RequestParam(defaultValue = "false") boolean passadas){
+		List<Consulta> listaConsulta = consultaService.listar(usuarioAtual, passadas);
 		model.addAttribute("listaC", listaConsulta);
+		model.addAttribute("passadas", passadas);
 		return "consulta/listar";
 	}
 	

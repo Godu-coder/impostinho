@@ -12,7 +12,7 @@
 	<header th:replace="~{fragments/util :: cabecalho}"></header>
 	
 	<main class="conteudo-principal">
-		<h2>Lista de Consultas</h2>
+		<h2 th:text="${passadas} ? 'Consultas Passadas' : 'Próximas Consultas'">Lista de Consultas</h2>
 
 		<div class="tabela-container">
 			<table>
@@ -34,6 +34,9 @@
 			
 		</div>
 		
+		<a th:if="${!passadas}" th:href="@{/consulta/listar(passadas=true)}" class="btn-editar">Ver consultas passadas</a>
+		<a th:if="${passadas}" th:href="@{/consulta/listar}" class="btn-editar">Ver próximas consultas</a>
+		<p>
 		<a th:href="@{/consulta/cadastro}" class="btn-salvar" sec:authorize="hasAnyRole('ADMIN','ATENDENTE')">+ Nova Consulta</a>
 		
 	</main>
