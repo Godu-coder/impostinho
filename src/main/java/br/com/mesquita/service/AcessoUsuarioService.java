@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import br.com.mesquita.model.Usuario;
 import br.com.mesquita.repository.UsuarioRepository;
+import br.com.mesquita.security.AcessoUsuario;
+import io.micrometer.common.util.StringUtils;
 
 @Service
 public class AcessoUsuarioService implements UserDetailsService {
@@ -28,11 +30,7 @@ public class AcessoUsuarioService implements UserDetailsService {
 		Usuario usuario = usuarioRepository.findByUsername(username)
 				.orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado: " + username));
 
-		return User.builder()
-				.username(usuario.getUsername())
-				.password(usuario.getSenha())
-				.roles(usuario.getRole().replace("ROLE_", ""))
-				.build();
+		return new AcessoUsuario(usuario);
 	}	
 	
 	public List<Usuario> listar() {
@@ -46,13 +44,13 @@ public class AcessoUsuarioService implements UserDetailsService {
 
 		if (usuario.getId() != null) {
 			Usuario usuarioBanco = buscarPorId(usuario.getId());
-			if (usuario.getSenha() == null || usuario.getSenha().trim().isEmpty()) {
+			if (StringUtils.isBlank(usuario.getSenha())) {
 				usuario.setSenha(usuarioBanco.getSenha());
 			} else {
 				usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
 			}
 		} else {
-			if (usuario.getSenha() != null && !usuario.getSenha().trim().isEmpty()) {
+			if (StringUtils.isNotBlank(usuario.getSenha())) {
 				usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
 			}
 		}
