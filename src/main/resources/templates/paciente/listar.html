@@ -20,26 +20,19 @@
 				<thead>
 					<tr>
 						<th>Nome</th>
-						<th>Sexo</th>
 						<th>Cpf</th>
 						<th>Data de nascimento</th>
-						<th>Endereço</th>
 						<th>Telefone</th>
-						<th>Alergias</th>
 						<th>Ações</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="p : ${listaP}">
 						<td th:text="${p.nome}"></td>
-						<td th:text="${p.sexo}"></td>
 						<td th:text="${p.cpfFormatada}"></td>
 						<td th:text="${p.dataNascimento} ? ${#temporals.format(p.dataNascimento, 'dd/MM/yyyy')} : ''"></td>
-						<td th:text="${p.endereco}"></td>
-
 						<td th:text="${p.foneFormatado}"></td>
 
-						<td th:text="${p.alergia}"></td>
 						<td>
 						<a th:href="@{/paciente/editar(id=${p.id})}" class="btn-editar">Editar</a>
 						</td>
