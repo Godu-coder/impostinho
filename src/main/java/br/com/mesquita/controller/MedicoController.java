@@ -3,6 +3,9 @@ package br.com.mesquita.controller;
 import java.util.List;
 
 import org.hibernate.PropertyValueException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +23,7 @@ import br.com.mesquita.service.MedicoService;
 @PreAuthorize("hasAnyRole('ATENDENTE', 'ADMIN')")
 public class MedicoController {
 	
-	MedicoService medicoService;
+	private MedicoService medicoService;
 	
 	public MedicoController(MedicoService medicoService) {
 		this.medicoService = medicoService;
@@ -33,6 +36,13 @@ public class MedicoController {
 		model.addAttribute("medico", new Medico());
 		return "medico/listar";
 	}
+	
+	@GetMapping("/listarPaginado")
+    public String listar(@PageableDefault(size = 1, page = 0) Pageable pagina, Model model) {
+        Page<Medico> paginaMedicos = medicoService.listarPagina(pagina);
+        model.addAttribute("paginaMedicos", paginaMedicos);
+        return "medico/listarPaginado"; 
+    }
 	
 	@GetMapping("/listar/demitidos")
 	String listarMedicosInativos(Model model) {

@@ -213,3 +213,53 @@ tr:hover td {
 td:last-child {
     font-weight: 500;
 }
+
+.paginacao-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0 14px 0;
+    font-family: sans-serif;
+}
+
+.paginacao-info {
+    color: #1b2e18;
+    font-size: 0.95rem;
+}
+
+.paginacao-botoes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.btn-paginacao {
+    display: inline-block;
+    padding: 7px 14px;
+    background-color: #f4f7f4;
+    color: #233d1f;
+    border: 1px solid #233d1f;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-paginacao:hover {
+    background-color: #38762d;
+    border-color: #38762d;
+    color: #ffffff;
+}
+
+/* Destaque para a página atual (mesmo verde escuro do header e botões Editar) */
+.btn-paginacao.ativo {
+    background-color: #233d1f;
+    border-color: #233d1f;
+    color: #ffffff;
+    cursor: default;
+    pointer-events: none;
+}

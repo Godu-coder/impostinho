@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="UTF-8">
+	<title>Lista de médicos</title>
+	<link rel="stylesheet" th:href="@{/css/base.css}">
+	<link rel="stylesheet" th:href="@{/css/layout.css}">
+	<link rel="stylesheet" th:href="@{/css/components.css}">
+</head>
+<body>
+	
+
+	<header th:replace="~{fragments/util :: cabecalho}"></header>
+	
+
+	<div class="caixa">
+		<h2>Lista de médicos</h2>
+
+		<table>
+			<tr>
+				<th>Nome</th>
+				<th>Especialidade</th>
+				<th>Data de admissão</th>
+				<th>Cpf</th>
+				<th>Ações</th>
+			</tr>
+			<tr th:each="medicos : ${paginaMedicos.content}">
+				<td th:text="${medicos.nome}"></td>
+				<td th:text="${medicos.especialidade}"></td>
+				<td th:text="${medicos.DataAdmissaoFormatada}"></td>
+				<td th:text="${medicos.cpfFormatada}"></td>
+				<td>
+					<a th:href="@{/medico/editar(id=${medicos.id})}" class="btn-editar">Editar</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+		
+	<a th:href="@{/medico/cadastro}" class="btn-salvar ">+ Novo Médico</a>
+	
+	<!-- Links de Navegação -->
+	<div class="paginacao-container" th:if="${paginaMedicos.totalPages > 0}">
+	    
+	    <div class="paginacao-botoes">
+	        <!-- Botão Anterior -->
+	        <a class="btn-paginacao"
+	           th:if="${paginaMedicos.hasPrevious()}" 
+	           th:href="@{/medico/listarPaginado(page=${paginaMedicos.number - 1}, size=${paginaMedicos.size})}">
+	           &laquo; Anterior
+	        </a>
+
+	        <!-- Números das Páginas -->
+	        <span th:each="i : ${#numbers.sequence(0, paginaMedicos.totalPages - 1)}">
+	            <a class="btn-paginacao"
+	               th:href="@{/medico/listarPaginado(page=${i}, size=${paginaMedicos.size})}" 
+	               th:text="${i + 1}" 
+	               th:classappend="${i == paginaMedicos.number} ? 'ativo' : ''">1</a>
+	        </span>
+
+	        <!-- Botão Próxima -->
+	        <a class="btn-paginacao"
+	           th:if="${paginaMedicos.hasNext()}" 
+	           th:href="@{/medico/listarPaginado(page=${paginaMedicos.number + 1}, size=${paginaMedicos.size})}">
+	           Próxima &raquo;
+	        </a>
+	    </div>
+	</div>
+	
+	<footer th:replace="~{fragments/util :: rodape}"></footer>
+	
+</body>
+</html>

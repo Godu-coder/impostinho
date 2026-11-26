@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.hibernate.PropertyValueException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,11 @@ public class MedicoService {
 		this.passwordEncoder = passwordEncoder;
 	}
 
+	//Pede uma lista do banco de dados com a a quantidade máxima determinada na controller.
+	public Page<Medico> listarPagina(Pageable pagina) {
+        return medicoRepository.findAll(pagina);
+    }
+	
 	public List<Medico> listar() {
 		return medicoRepository.findAll();
 	}
