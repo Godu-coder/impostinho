@@ -1,5 +1,5 @@
 # Estágio 1: Build da aplicação (não exige Java ou Maven instalados no servidor)
-FROM eclipse-temurin:25-jdk-alpine as jre-build AS build
+FROM eclipse-temurin:25-jdk-alpine AS build
 WORKDIR /app
 
 # Copia os arquivos do Maven Wrapper e o pom.xml primeiro (aproveita cache do Docker)
