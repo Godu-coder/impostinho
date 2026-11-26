@@ -1,5 +1,5 @@
 # Estágio 1: Build da aplicação (não exige Java ou Maven instalados no servidor)
-FROM eclipse-temurin:21-jdk-alpine AS build
+FROM eclipse-temurin:25 as jre-build AS build
 WORKDIR /app
 
 # Copia os arquivos do Maven Wrapper e o pom.xml primeiro (aproveita cache do Docker)
@@ -13,7 +13,7 @@ COPY src ./src
 RUN ./mvnw clean package -DskipTests
 
 # Estágio 2: Imagem final otimizada para produção
-FROM eclipse-temurin:21-jre-alpine
+FROM eclipse-temurin:25 as jre-build
 WORKDIR /app
 
 # Cria um usuário sem privilégios de root (boa prática de segurança em servidores)
